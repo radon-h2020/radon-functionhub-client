@@ -1,0 +1,16 @@
+Complete output from command git rev-parse HEAD:
+fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+HEAD
+
+----------------------------------------
+certifi==2019.11.28
+chardet==3.0.4
+cli==0.1
+Click==7.0
+## !! Could not determine repository location
+functionhub==0.1
+idna==2.8
+requests==2.22.0
+urllib3==1.25.7
