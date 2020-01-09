@@ -3,6 +3,7 @@ import configparser
 import requests
 import os
 import zipfile
+import errno
 
 function_hub = 'https://repo.cloudstash.io'
 
@@ -58,10 +59,13 @@ def create_function(filename):
         project_config.close()
         click.echo(f"project {filename} successfully created")
 
-    except FileExistsError():
-        raise click.ClickException('project already exist')
     except OSError as err:
-        raise click.ClickException(err)
+        if err.errno == errno.EEXIST:
+            raise click.ClickException("Project already exist")
+        else:
+            os.rmdir(filename)
+            raise click.ClickException(err)
+
         
 @click.command()
 @click.argument('method')
