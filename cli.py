@@ -1,6 +1,8 @@
 import click
 import configparser
 import requests
+import os
+import zipfile
 
 function_hub = 'https://repo.cloudstash.io'
 
@@ -15,7 +17,6 @@ def read_config():
 
 def deploy_function(filename):
     config = read_config()
-
     try:
         CONFIG_NAME = config.get('FUNCTION','name')
         CONFIG_VERSION = config.get('FUNCTION','version')
@@ -39,9 +40,28 @@ def deploy_function(filename):
         requests.exceptions.RequestException
 
 def package_function(filename):
-    
+    if os.path.isdir(filename):
+        print('pack repo')
+    else:
+        raise click.ClickException(f"folder {filename} cannot be found")
 
+def create_function(filename):
+    try:
+        os.mkdir(filename)
+        config_file = open('resources/config.ini', 'r')
+        # project_config = open(f"{filename}/config.ini", 'w')
+        for line in config_file.readlines():
+            # project_config.write(line)
+            print(line)
+        
+        config_file.close()
+        # project_config.close()
+    except FileExistsError():
+        raise click.ClickException('project already exist')
+    except OSError as err:
+        raise click.ClickException(err)
 
+        
 @click.command()
 @click.argument('method')
 @click.argument('filename')
@@ -50,5 +70,7 @@ def main(method,filename):
         deploy_function(filename)
     elif method.lower() == 'package':
         package_function(filename)
+    elif method.lower() == 'create':
+        create_function(filename)
     else:
         raise click.ClickException("wrong parameter. Supported parameter is deploy")
