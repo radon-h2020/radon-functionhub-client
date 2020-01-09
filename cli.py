@@ -42,6 +42,7 @@ def deploy_function(filename):
 def package_function(filename):
     if os.path.isdir(filename):
         print('pack repo')
+        # replace with zip - maybe not essential at the moment
     else:
         raise click.ClickException(f"folder {filename} cannot be found")
 
@@ -49,18 +50,18 @@ def create_function(filename):
     try:
         os.mkdir(filename)
         config_file = open('resources/config.ini', 'r')
-        # project_config = open(f"{filename}/config.ini", 'w')
+        project_config = open(f"{filename}/config.ini", 'w')
         for line in config_file.readlines():
-            # project_config.write(line)
-            print(line)
+            project_config.write(line)
         
         config_file.close()
-        # project_config.close()
+        project_config.close()
+        click.echo(f"project {filename} successfully created")
+
     except FileExistsError():
         raise click.ClickException('project already exist')
     except OSError as err:
         raise click.ClickException(err)
-
         
 @click.command()
 @click.argument('method')
