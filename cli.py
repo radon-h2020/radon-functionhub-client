@@ -4,41 +4,22 @@ import requests
 import os
 import zipfile
 import errno
+import sys
 
-function_hub = 'https://repo.cloudstash.io'
+# global class with all global data
+class Global(object):
+    def __init__(self, endpoint, debug):
+        self.endpoint = endpoint
+        # self.config = read_config(os.path.abspath(config))
+        self.debug = debug
 
-def read_config():
+def read_config(config_file):
     try:
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read(config_file)
         return config
     except:
         configparser.Error('error')
-
-
-def deploy_function(filename):
-    config = read_config()
-    try:
-        CONFIG_NAME = config.get('FUNCTION','name')
-        CONFIG_VERSION = config.get('FUNCTION','version')
-        CONFIG_REPO = config.get('REPOSITORY','repository')
-        CONFIG_ORG = config.get('REPOSITORY','org')
-        CONFIG_PROVIDER = config.get('RUNTIME','provider')
-        CONFIG_RUNTIME = config.get('RUNTIME','runtime')
-    except:
-        raise KeyError("unsupported key")
-
-    click.secho(f"deploy function {CONFIG_NAME} to repository {CONFIG_REPO}", bold=True)
-    
-    try:
-        r = requests.put(
-            f"{function_hub}/{CONFIG_ORG}/{CONFIG_REPO}/{CONFIG_PROVIDER}/{CONFIG_RUNTIME}/{CONFIG_NAME}/{CONFIG_VERSION}/{CONFIG_NAME}-{CONFIG_VERSION}.zip",
-            files={'file': open(filename,'rb')},
-            headers={'content-type':'application/zip'}
-        )
-        click.echo(r.text)
-    except:
-        requests.exceptions.RequestException
 
 def package_function(filename):
     if os.path.isdir(filename):
@@ -64,18 +45,50 @@ def create_function(filename):
             raise click.ClickException("Project already exist")
         else:
             os.rmdir(filename)
-            raise click.ClickException(err)
+            raise click.ClickException(err)    
 
+
+# Defining the main command group (cli) and global options (e.g. --debug)
+@click.group()
+@click.option('--endpoint', '-e', envvar='FH_ENDPOINT', default='https://repo.cloudstash.io', help='Endpoint URL for your FunctionHub')
+@click.option('--debug', '-d', envvar='FH_DEBUG', default=False, help='Enable debug output')
+# enabling the built in --version option. Uses the version from setup.py
+@click.version_option()
+# pass the main command context to other subcommands
+@click.pass_context
+def cli(ctx, endpoint, debug):
+    # add a Global object to the context that will be passed to all subcommands
+    ctx.obj = Global(endpoint, debug)
+
+# subcommnad for deploy operation
+@cli.command(name='deploy')
+@click.argument('package_dir', type=click.Path(exists=True,dir_okay=True,resolve_path=True))
+@click.pass_obj
+def deploy_function(global_config, package_dir):
+    pass
+    config_file=os.path.join(package_dir,'config.ini')
+    if not os.path.exists(config_file):
+        sys.exit(f"{config_file} Couldn't be found")
         
-@click.command()
-@click.argument('method')
-@click.argument('filename')
-def main(method,filename):
-    if method.lower() == 'deploy':
-        deploy_function(filename)
-    elif method.lower() == 'package':
-        package_function(filename)
-    elif method.lower() == 'create':
-        create_function(filename)
-    else:
-        raise click.ClickException("wrong parameter. Supported parameter is deploy")
+    config = read_config()
+    try:
+        CONFIG_NAME = config.get('FUNCTION','name')
+        CONFIG_VERSION = config.get('FUNCTION','version')
+        CONFIG_REPO = config.get('REPOSITORY','repository')
+        CONFIG_ORG = config.get('REPOSITORY','org')
+        CONFIG_PROVIDER = config.get('RUNTIME','provider')
+        CONFIG_RUNTIME = config.get('RUNTIME','runtime')
+    except:
+        raise KeyError("unsupported key")
+
+    click.secho(f"deploy function {CONFIG_NAME} to repository {CONFIG_REPO}", bold=True)
+    
+    try:
+        r = requests.put(
+            f"{function_hub}/{CONFIG_ORG}/{CONFIG_REPO}/{CONFIG_PROVIDER}/{CONFIG_RUNTIME}/{CONFIG_NAME}/{CONFIG_VERSION}/{CONFIG_NAME}-{CONFIG_VERSION}.zip",
+            files={'file': open(filename,'rb')},
+            headers={'content-type':'application/zip'}
+        )
+        click.echo(r.text)
+    except:
+        requests.exceptions.RequestException

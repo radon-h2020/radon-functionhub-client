@@ -2,13 +2,13 @@ from setuptools import setup
 
 setup(
     name='functionhub',
-    version='0.1',
+    version='v0.1.0',
     py_modules=['cli'],
     install_requires=[
         'Click','requests'
     ],
     entry_points='''
         [console_scripts]
-        cli=cli:main
+        cli=cli:cli
     ''',
 )
