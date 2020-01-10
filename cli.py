@@ -4,7 +4,6 @@ import requests
 import os
 import zipfile
 import errno
-import sys
 
 # global class with all global data
 class Global(object):
@@ -28,25 +27,6 @@ def package_function(filename):
     else:
         raise click.ClickException(f"folder {filename} cannot be found")
 
-def create_function(filename):
-    try:
-        os.mkdir(filename)
-        config_file = open('resources/config.ini', 'r')
-        project_config = open(f"{filename}/config.ini", 'w')
-        for line in config_file.readlines():
-            project_config.write(line)
-        
-        config_file.close()
-        project_config.close()
-        click.echo(f"project {filename} successfully created")
-
-    except OSError as err:
-        if err.errno == errno.EEXIST:
-            raise click.ClickException("Project already exist")
-        else:
-            os.rmdir(filename)
-            raise click.ClickException(err)    
-
 
 # Defining the main command group (cli) and global options (e.g. --debug)
 @click.group()
@@ -62,13 +42,13 @@ def cli(ctx, endpoint, debug):
 
 # subcommnad for deploy operation
 @cli.command(name='deploy')
-@click.argument('package_dir', type=click.Path(exists=True,dir_okay=True,resolve_path=True))
+@click.argument('package_dir', type=click.Path(exists=True,resolve_path=True))
 @click.pass_obj
 def deploy_function(global_config, package_dir):
     pass
     config_file=os.path.join(package_dir,'config.ini')
     if not os.path.exists(config_file):
-        sys.exit(f"{config_file} Couldn't be found")
+        raise click.ClickException(f"{config_file} Couldn't be found")
         
     config = read_config()
     try:
@@ -92,3 +72,28 @@ def deploy_function(global_config, package_dir):
         click.echo(r.text)
     except:
         requests.exceptions.RequestException
+
+@cli.command(name='create')
+@click.argument('package_name', type=click.Path(exists=False))
+@click.argument('desired_dir', required=False, type=click.Path(exists=True,resolve_path=True, writable=True))
+@click.pass_obj
+def create_function(global_config, package_name, desired_dir=os.getcwd()):
+    pass
+    try:
+        target_dir=os.path.join(desired_dir,package_name)
+        os.mkdir(target_dir)
+        config_file = open('resources/config.ini', 'r')
+        project_config = open(f"{target_dir}/config.ini", 'w')
+        for line in config_file.readlines():
+            project_config.write(line)
+        
+        config_file.close()
+        project_config.close()
+        click.echo(f"project {package_name} successfully created")
+
+    except OSError as err:
+        if err.errno == errno.EEXIST:
+            raise click.ClickException("Project already exist")
+        else:
+            os.rmdir(target_dir)
+            raise click.ClickException(err)         
