@@ -75,9 +75,9 @@ def deploy_function(global_config, package_dir):
 
 @cli.command(name='create')
 @click.argument('package_name', type=click.Path(exists=False))
-@click.argument('desired_dir', required=False, type=click.Path(exists=True,resolve_path=True, writable=True))
+@click.argument('desired_dir', required=False, default=os.getcwd(), type=click.Path(exists=True,resolve_path=True, writable=True))
 @click.pass_obj
-def create_function(global_config, package_name, desired_dir=os.getcwd()):
+def create_function(global_config, package_name, desired_dir):
     pass
     try:
         target_dir=os.path.join(desired_dir,package_name)
