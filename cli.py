@@ -9,7 +9,6 @@ import errno
 class Global(object):
     def __init__(self, endpoint, debug):
         self.endpoint = endpoint
-        # self.config = read_config(os.path.abspath(config))
         self.debug = debug
 
 def read_config(config_file):
