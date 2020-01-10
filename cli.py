@@ -64,7 +64,7 @@ def deploy_function(global_config, package_dir):
     
     try:
         r = requests.put(
-            f"{function_hub}/{CONFIG_ORG}/{CONFIG_REPO}/{CONFIG_PROVIDER}/{CONFIG_RUNTIME}/{CONFIG_NAME}/{CONFIG_VERSION}/{CONFIG_NAME}-{CONFIG_VERSION}.zip",
+            f"{global_config.endpoint}/{CONFIG_ORG}/{CONFIG_REPO}/{CONFIG_PROVIDER}/{CONFIG_RUNTIME}/{CONFIG_NAME}/{CONFIG_VERSION}/{CONFIG_NAME}-{CONFIG_VERSION}.zip",
             files={'file': open(filename,'rb')},
             headers={'content-type':'application/zip'}
         )
