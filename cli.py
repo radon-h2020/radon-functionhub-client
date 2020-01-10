@@ -49,7 +49,7 @@ def deploy_function(global_config, package_dir):
     if not os.path.exists(config_file):
         raise click.ClickException(f"{config_file} Couldn't be found")
         
-    config = read_config()
+    config = read_config(config_file)
     try:
         CONFIG_NAME = config.get('FUNCTION','name')
         CONFIG_VERSION = config.get('FUNCTION','version')
