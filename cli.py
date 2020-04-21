@@ -5,6 +5,7 @@ import os
 import base64
 import zipfile
 import errno
+import shutil
 
 from configparser import Error
 
@@ -21,13 +22,6 @@ def read_config(config_file):
         return config
     except:
         configparser.Error('error')
-
-def package_function(filename):
-    if os.path.isdir(filename):
-        print('pack repo')
-        # replace with zip - maybe not essential at the moment
-    else:
-        raise click.ClickException(f"folder {filename} cannot be found")
 
 
 # Defining the main command group (cli) and global options (e.g. --debug)
@@ -102,3 +96,11 @@ def create_function(global_config, package_name, desired_dir):
         else:
             os.rmdir(target_dir)
             raise click.ClickException(err)         
+
+@cli.command(name='package')
+@click.argument('package_dir', type=click.Path(exists=True, resolve_path=True,))
+def package_function(package_dir):
+    if os.path.isdir(package_dir):
+        shutil.make_archive(os.path.join(os.getcwd(),os.path.basename(package_dir)), 'zip', os.path.dirname(package_dir))
+    else:
+        raise click.ClickException(f"folder {filename} cannot be found")        
