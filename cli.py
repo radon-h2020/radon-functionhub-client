@@ -2,8 +2,11 @@ import click
 import configparser
 import requests
 import os
+import base64
 import zipfile
 import errno
+
+from configparser import Error
 
 # global class with all global data
 class Global(object):
@@ -41,36 +44,39 @@ def cli(ctx, endpoint, debug):
 
 # subcommnad for deploy operation
 @cli.command(name='deploy')
-@click.argument('package_dir', type=click.Path(exists=True,resolve_path=True))
+@click.argument('zip_file', type=click.Path(exists=True,resolve_path=True))
 @click.pass_obj
-def deploy_function(global_config, package_dir):
+def deploy_function(global_config, zip_file):
     pass
-    config_file=os.path.join(package_dir,'config.ini')
-    if not os.path.exists(config_file):
-        raise click.ClickException(f"{config_file} Couldn't be found")
+    if not os.path.exists('config.ini'):
+        raise click.ClickException(f"Config file could not be found")
         
-    config = read_config(config_file)
+    config = read_config('config.ini')
+    payload = {}
     try:
-        CONFIG_NAME = config.get('FUNCTION','name')
-        CONFIG_VERSION = config.get('FUNCTION','version')
-        CONFIG_REPO = config.get('REPOSITORY','repository')
-        CONFIG_ORG = config.get('REPOSITORY','org')
-        CONFIG_PROVIDER = config.get('RUNTIME','provider')
-        CONFIG_RUNTIME = config.get('RUNTIME','runtime')
+        payload['artifactName'] = config.get('FUNCTION','name')
+        payload['version'] = config.get('FUNCTION','version')
+        payload['repositoryName'] = config.get('REPOSITORY','repository')
+        payload['organization'] = config.get('REPOSITORY','org')
+        payload['provider'] = config.get('RUNTIME','provider')
+        payload['runtime'] = config.get('RUNTIME','runtime')
+        with open(zip_file,'rb') as binfile:
+            encoded = base64.b64encode(binfile.read())
+        payload['file'] = encoded.decode()
     except:
         raise KeyError("unsupported key")
 
-    click.secho(f"deploy function {CONFIG_NAME} to repository {CONFIG_REPO}", bold=True)
+    click.secho(f"deploy function {payload['artifactName']} to repository {payload['repositoryName']}", bold=True)
     
     try:
-        r = requests.put(
-            f"{global_config.endpoint}/{CONFIG_ORG}/{CONFIG_REPO}/{CONFIG_PROVIDER}/{CONFIG_RUNTIME}/{CONFIG_NAME}/{CONFIG_VERSION}/{CONFIG_NAME}-{CONFIG_VERSION}.zip",
-            files={'file': open(filename,'rb')},
-            headers={'content-type':'application/zip'}
+        r = requests.post(
+            global_config.endpoint,
+            json=payload,
+            headers={'content-type':'application/json'}
         )
-        click.echo(r.text)
-    except:
-        requests.exceptions.RequestException
+        click.echo(r.status_code)
+    except requests.exceptions.RequestException as e:
+            click.echo(e)
 
 @cli.command(name='create')
 @click.argument('package_name', type=click.Path(exists=False))
@@ -81,7 +87,7 @@ def create_function(global_config, package_name, desired_dir):
     try:
         target_dir=os.path.join(desired_dir,package_name)
         os.mkdir(target_dir)
-        config_file = open('resources/config.ini', 'r')
+        config_file = open('.resources/config.ini', 'r')
         project_config = open(f"{target_dir}/config.ini", 'w')
         for line in config_file.readlines():
             project_config.write(line)
