@@ -11,9 +11,10 @@ from configparser import Error
 
 # global class with all global data
 class Global(object):
-    def __init__(self, endpoint, debug):
+    def __init__(self, endpoint, debug, token):
         self.endpoint = endpoint
         self.debug = debug
+        self.token = token
 
 def read_config(config_file):
     try:
@@ -26,15 +27,16 @@ def read_config(config_file):
 
 # Defining the main command group (cli) and global options (e.g. --debug)
 @click.group()
-@click.option('--endpoint', '-e', envvar='FH_ENDPOINT', default='https://repo.cloudstash.io', help='Endpoint URL for your FunctionHub')
+@click.option('--endpoint', '-e', envvar='FH_ENDPOINT', default='https://cloudstash.io/artifact', help='Endpoint URL for your FunctionHub')
 @click.option('--debug', '-d', envvar='FH_DEBUG', default=False, help='Enable debug output')
+@click.option('--access-token', '-at', envvar='ACCESS_TOKEN', default=False, help='Set access token for publishing to private repositories')
 # enabling the built in --version option. Uses the version from setup.py
 @click.version_option()
 # pass the main command context to other subcommands
 @click.pass_context
-def cli(ctx, endpoint, debug):
+def cli(ctx, endpoint, debug, token):
     # add a Global object to the context that will be passed to all subcommands
-    ctx.obj = Global(endpoint, debug)
+    ctx.obj = Global(endpoint, debug, token)
 
 # subcommnad for deploy operation
 @cli.command(name='deploy')
