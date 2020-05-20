@@ -29,7 +29,7 @@ def read_config(config_file):
 @click.group()
 @click.option('--endpoint', '-e', envvar='FH_ENDPOINT', default='https://cloudstash.io/artifact', help='Endpoint URL for your FunctionHub')
 @click.option('--debug', '-d', envvar='FH_DEBUG', default=False, help='Enable debug output')
-@click.option('--access-token', '-at', envvar='ACCESS_TOKEN', default=False, help='Set access token for publishing to private repositories')
+@click.option('--token', '-at', envvar='ACCESS_TOKEN', default=False, help='Set access token for publishing to private repositories')
 # enabling the built in --version option. Uses the version from setup.py
 @click.version_option()
 # pass the main command context to other subcommands
@@ -50,7 +50,7 @@ def deploy_function(global_config, zip_file):
     config = read_config('config.ini')
     payload = {}
     try:
-        payload['artifactName'] = config.get('FUNCTION','name')
+        payload['artifact_name'] = config.get('FUNCTION','name')
         payload['version'] = config.get('FUNCTION','version')
         payload['repositoryName'] = config.get('REPOSITORY','repository')
         payload['organization'] = config.get('REPOSITORY','org')
@@ -63,7 +63,7 @@ def deploy_function(global_config, zip_file):
     except:
         raise KeyError("unsupported key")
 
-    click.secho(f"deploy function {payload['artifactName']} to repository {payload['repositoryName']}", bold=True)
+    click.secho(f"deploy function {payload['artifact_name']} to repository {payload['repositoryName']}", bold=True)
     
     try:
         r = requests.post(
