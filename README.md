@@ -2,7 +2,7 @@
 
 | Items                    | Contents                                                     |
 | ------------------------ | ------------------------------------------------------------ |
-| **Short Description**    | The FunctionHub cli provides interaction with [FunctionHub](https://cloudstash.io) for storing and accessing reusable functions. FunctionHub is child of [Cloudstash](https://cloudstash.io), a broader cloud based storage unit for functions and artifacts. |
+| **Short Description**    | The FunctionHub-cli provides interaction with [FunctionHub](https://cloudstash.io) for storing and accessing reusable functions. FunctionHub is child of [Cloudstash](https://cloudstash.io), a broader cloud based storage unit for functions and artifacts. |
 | **Documentation** | WPI|
 | **Stand-Alone tutorial** | https://functionhub-cli.readthedocs.io/  |
 | **Video** | WPI  |
@@ -46,7 +46,7 @@ _make changes and verify with the local cli_
 
 
 
-## Contributions
+## Contribution
 We encourage contributions from everyone who finds interest in this project!
 
 For any ideas, bugs or new features use our issue tracker at our  [GitHub](https://github.com/radon-h2020/functionHub-client/issues)  project.
