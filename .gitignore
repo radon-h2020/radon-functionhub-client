@@ -1,4 +1,6 @@
 venv/
 *.zip
 .vscode
+
 docs/_build
+docs/_static
