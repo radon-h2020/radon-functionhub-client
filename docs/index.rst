@@ -14,13 +14,15 @@ FunctionHub-cli
 .. include:: contents/introduction.rst
 
 
-.. include:: contents/installation.rst
+.. include:: contents/business_purpose.rst
 
+.. include:: contents/technical.rst
 
 .. include:: contents/quickstart.rst
 
 
 .. include:: contents/contribution.rst
 
+.. include:: contents/contact.rst
 
-.. include:: contents/business_purpose.rst
+.. include:: contents/acknowledgements.rst

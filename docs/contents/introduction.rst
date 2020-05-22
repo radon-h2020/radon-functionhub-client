@@ -1,7 +1,10 @@
 Introduction
 ===========================================
 
-FunctionHub is the package manager for general, reusable Functions for cloud vendor like AWS, Google cloud and Azure.
+FunctionHub is the package manager for general, reusable Functions for cloud vendors like AWS, Google cloud and Azure.
+It is child of `Cloudstash <https://cloudstash.io>`__, a broader cloud based storage unit for functions and artifacts.
 
-The FunctionHub-cli is how we interact with `FunctionHub <https://cloudstash.io>`_
+The FunctionHub-cli provides interaction with `FunctionHub <https://cloudstash.io>`__ for storing and accessing reusable functions. 
+
+
 

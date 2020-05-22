@@ -1,3 +1,3 @@
-Installation
+Technical details
 ===========================================
-link:
+WIP
