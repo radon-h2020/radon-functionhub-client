@@ -22,13 +22,11 @@ For FunctionHub developers and users, the following additional software must be 
 ### Creating a development environment
 
 1.  Fork and clone the repository.
-2.  Setup a virtual environment 
-``python3 -m venv venv``
-3.  Install requirements to the virtual env 
+2.  Setup a virtual environment. ``python3 -m venv venv``
+3.  Install requirements to the virtual env. 
 ``venv/bin/pip install -r requirements.txt`` 
-4. Activate et the virtual env 
-``. venv/bin/activate`` 
-5. Enable the CLI to respond with the command cli instead of python cli.py
+5. Activate et the virtual env.		``. venv/bin/activate`` 
+6. Enable the CLI to respond with the command cli instead of python cli.py.
 ``pip install --editable .``
 
 _make changes and verify with the local cli_
@@ -39,11 +37,11 @@ _make changes and verify with the local cli_
 
 ### Pushing functions to FunctionHub using CLI
 
-1.  Create a project ``cli create exampleProject`` 
-2. ``cd exampleProject`` 
-3. Set the configuration file _config.ini_ with your parameters (example of _config.ini_ can be found  in [test](test/) directory)
+1. Create a project. ``cli create exampleProject`` 
+2. Move to the project directory. ``cd exampleProject`` 
+3. Set the configuration file _config.ini_ with your parameters. (example of _config.ini_ can be found  in [test](test/) directory)
 4. Store a function and compress it as myfunction.zip
-5. ``cli deploy myfunction.zip`` 
+5. Deploy the function to [FunctionHub](https://cloudstash.io). ``cli deploy myfunction.zip`` 
 6. Check the function has been uploaded on the selected repository (temporary unavailable)
 
 
@@ -60,6 +58,3 @@ When contributing, fork the repository and commit work through pull requests.
 
 
 Read the [roadmap](ROADMAP.md)
-
-
-
