@@ -1,19 +1,11 @@
 ## FunctionHub client 
-### _interaction with cloudstash.io_
 
-**Creating a development environment:**
-
-1. python3 -m venv venv (setup a virtual environment)
-2. venv/bin/pip install -r requirements.txt (installing requirements to the virtual env)
-3. . venv/bin/activate (activating the virtual env)
-4. pip install --editable . (enabling the CLI to respond with the command cli instead of python cli.py)
-
-
-**Using the client:**
-
-1. Configure a config.ini file. You find an example in ```test/``` folder
-2. Zip a folder with the Function and requirements
-3. Run the command ```cli deploy <file.zip>```. Make sure the .ini files is present in your PWD
+| Items                    | Contents                                                     |
+| ------------------------ | ------------------------------------------------------------ |
+| **Description**    | The FunctionHub client provides interaction with [cloudstash](https://cloudstash.io) for storing reusable functions |
+| **Documentation** | https://functionhub-client.readthedocs.io/              |
+| **Licence**              | [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0) |
+| **Contact**              | <ul><li> Praqma ([@naesheim](https://github.com/naesheim)) </li></ul> |
 
 
 **Contribute:**
