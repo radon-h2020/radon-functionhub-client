@@ -1,6 +1,7 @@
 venv/
 *.zip
 .vscode
+.DS_store
 
 docs/_build
 docs/_static
