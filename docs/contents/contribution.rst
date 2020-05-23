@@ -11,4 +11,4 @@ project.
 When contributing, fork the repository and commit work through pull
 requests.
 
-Read the `roadmap <ROADMAP.md>`__
+Read the `roadmap <https://github.com/radon-h2020/functionHub-client/blob/master/ROADMAP.md>`__

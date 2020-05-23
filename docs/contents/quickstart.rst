@@ -24,7 +24,7 @@ Creating a development environment
 5. Enable the CLI to respond with the command cli instead of python
    cli.py. ``pip install --editable .``
 
-*make changes and verify with the local cli*
+**make changes and verify with the local cli**
 
 User account & Navigation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,9 +39,9 @@ Pushing functions to FunctionHub using CLI
 1. Create a project. ``cli create exampleProject``
 2. Move to the project directory. ``cd exampleProject``
 3. Set the configuration file *config.ini* with your parameters.
-   (example of *config.ini* can be found in `test <test/>`__ directory)
+   (example of *config.ini* can be found in `test <https://github.com/radon-h2020/functionHub-client/tree/master/test>`__ directory)
 4. Store a function and compress it as myfunction.zip
 5. Deploy the function to `FunctionHub <https://cloudstash.io>`__.
    ``cli deploy myfunction.zip``
 6. Check the function has been uploaded on the selected repository
-   (temporary unavailable)ß
+   (temporary unavailable)
