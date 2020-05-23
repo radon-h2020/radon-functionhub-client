@@ -44,4 +44,4 @@ Pushing functions to FunctionHub using CLI
 5. Deploy the function to `FunctionHub <https://cloudstash.io>`__.
    ``cli deploy myfunction.zip``
 6. Check the function has been uploaded on the selected repository
-   (temporary unavailable)ß
+   (temporary unavailable)
