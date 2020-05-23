@@ -2,12 +2,6 @@ venv/
 *.zip
 .vscode
 .DS_store
-docs/.DS_Store
-
 
 docs/_build
 docs/_static
-
-__pycache__/
-functionhub.egg-info/
-test/
