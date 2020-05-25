@@ -10,19 +10,16 @@ FunctionHub-cli
    :maxdepth: 2
    :caption: contents:
 
+.. include:: _templates/introduction.rst
 
-.. include:: contents/introduction.rst
+.. include:: _templates/business_purpose.rst
 
+.. include:: _templates/technical.rst
 
-.. include:: contents/business_purpose.rst
+.. include:: _templates/quickstart.rst
 
-.. include:: contents/technical.rst
+.. include:: _templates/contribution.rst
 
-.. include:: contents/quickstart.rst
+.. include:: _templates/contact.rst
 
-
-.. include:: contents/contribution.rst
-
-.. include:: contents/contact.rst
-
-.. include:: contents/acknowledgements.rst
+.. include:: _templates/acknowledgements.rst
