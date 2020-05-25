@@ -1,5 +1,5 @@
 Contribution
-==========================================
+---------------------------------------------
 
 We encourage contributions from everyone who finds interest in this
 project!
