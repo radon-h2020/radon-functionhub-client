@@ -1,5 +1,6 @@
 Quickstart
-===========================================
+---------------------------------------------
+
 System Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -60,3 +61,6 @@ Pushing functions to FunctionHub using CLI
    ``cli deploy myfunction.zip``
 6. Check the function has been uploaded on the selected repository
    (temporary unavailable)
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
