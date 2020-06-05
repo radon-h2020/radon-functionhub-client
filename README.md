@@ -3,10 +3,8 @@
 | Items                    | Contents                                                     |
 | ------------------------ | ------------------------------------------------------------ |
 | **Short Description**    | The FunctionHub-cli provides interaction with [FunctionHub](https://cloudstash.io) for storing and accessing reusable functions. FunctionHub is child of [Cloudstash](https://cloudstash.io), a broader cloud based storage unit for functions and artifacts. |
-| **Documentation** | WPI|
-| **Stand-Alone tutorial** | https://functionhub-cli.readthedocs.io/  |
+| **Documentation** | https://functionhub-cli.readthedocs.io/|
 | **Video** | WPI  |
-| **Source code** | WPI  |
 | **Licence** | [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0) |
 | **Contact**              | <ul><li> Praqma ([@naesheim](https://github.com/naesheim)) </li></ul> |
 
