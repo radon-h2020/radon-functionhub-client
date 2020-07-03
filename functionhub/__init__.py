@@ -1,0 +1,1 @@
+from functionhub.cli import Global, cli
