@@ -5,8 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='functionhub',
-    version='v0.1.0',
-    py_modules=['cli'],
+    version='v0.1.1',
     author="naesheim",
     description="A client for CloudStash.io interaction",
     url="https://cloudstash.io",
@@ -22,6 +21,6 @@ setup(
     python_requires='>=3.6',
     entry_points='''
         [console_scripts]
-        cli=functionhub.cli:cli
+        fuhub=functionhub.main:fuhub
     '''
 )

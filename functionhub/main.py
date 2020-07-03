@@ -6,6 +6,7 @@ import base64
 import zipfile
 import errno
 import shutil
+import logging
 
 from configparser import Error
 
@@ -34,12 +35,12 @@ def read_config(config_file):
 @click.version_option()
 # pass the main command context to other subcommands
 @click.pass_context
-def cli(ctx, endpoint, debug, token):
+def fuhub(ctx, endpoint, debug, token):
     # add a Global object to the context that will be passed to all subcommands
     ctx.obj = Global(endpoint, debug, token)
 
 # subcommnad for deploy operation
-@cli.command(name='deploy')
+@fuhub.command(name='deploy')
 @click.argument('zip_file', type=click.Path(exists=True,resolve_path=True))
 @click.pass_obj
 def deploy_function(global_config, zip_file):
@@ -75,7 +76,7 @@ def deploy_function(global_config, zip_file):
     except requests.exceptions.RequestException as e:
             click.echo(e)
 
-@cli.command(name='create')
+@fuhub.command(name='create')
 @click.argument('package_name', type=click.Path(exists=False))
 @click.argument('desired_dir', required=False, default=os.getcwd(), type=click.Path(exists=True,resolve_path=True, writable=True))
 @click.pass_obj
@@ -100,10 +101,10 @@ def create_function(global_config, package_name, desired_dir):
             os.rmdir(target_dir)
             raise click.ClickException(err)         
 
-@cli.command(name='package')
+@fuhub.command(name='package')
 @click.argument('package_dir', type=click.Path(exists=True, resolve_path=True,))
 def package_function(package_dir):
     if os.path.isdir(package_dir):
         shutil.make_archive(os.path.join(os.getcwd(),os.path.basename(package_dir)), 'zip', os.path.dirname(package_dir))
     else:
-        raise click.ClickException(f"folder {filename} cannot be found")        
+        raise click.ClickException(f"folder {filename} cannot be found")

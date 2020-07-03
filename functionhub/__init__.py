@@ -1,1 +1,1 @@
-from functionhub.cli import Global, cli
+from functionhub.main import Global, fuhub
