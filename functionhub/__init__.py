@@ -1,0 +1,1 @@
+from functionhub.main import Global, fuhub

@@ -5,3 +5,5 @@ venv/
 
 docs/_build
 docs/_static
+
+*/__pycache__
