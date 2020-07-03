@@ -6,24 +6,25 @@ pipeline {
                 sh '''
                     echo Install requirements
                     python3 -m venv venv
-                    . venv/bin/actiave
+                    . venv/bin/activate
                     pip3 install -r requirements.txt
                     pip3 install --editable .
 
-                    cli --help
+                    fuhub --help
                 '''
             }
         }
 
-        stage('Deploy') {
+        stage('Upload Python package') {
             environment {
                 PYPI_ACCESS_TOKEN = credentials('naesheim-private-pypi')
             }
             steps {
                 sh '''
+                    . venv/bin/activate
                     pip3 install twine
                     python3 setup.py sdist bdist_wheel
-                    python3 -m twine deploy -u __token__ -p $PYPI_ACCESS_TOKEN dist/*
+                    python3 -m twine upload -u __token__ -p $PYPI_ACCESS_TOKEN dist/*
                 '''
             }
         }
