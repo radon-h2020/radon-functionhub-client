@@ -12,16 +12,10 @@ must be installed:
 -  pip - Python standard package manager
 
 
-Creating a development environment
+Download the Function Hub client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Fork and clone the repository.
-2. Setup a virtual environment. ``python3 -m venv venv``
-3. Install requirements to the virtual env.
-   ``venv/bin/pip install -r requirements.txt``
-4. Activate et the virtual env. ``. venv/bin/activate``
-5. Enable the CLI to respond with the command cli instead of python
-   cli.py. ``pip install --editable .``
+1. pip install functionhub
 
 **make changes and verify with the local cli**
 
@@ -36,7 +30,7 @@ User account & Navigation
 Pushing functions to FunctionHub using CLI
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Create a project. ``cli create exampleProject``
+1. Create a project. ``fuhub create exampleProject``
 2. Move to the project directory. ``cd exampleProject``
 3. Set the configuration file *config.ini* with your parameters.
    (example of *config.ini* can be found in `test <https://github.com/radon-h2020/functionHub-client/tree/master/test>`__ directory)
@@ -58,7 +52,7 @@ Pushing functions to FunctionHub using CLI
    
 4. Store a function and compress it as myfunction.zip
 5. Deploy the function to `FunctionHub <https://cloudstash.io>`__.
-   ``cli deploy myfunction.zip``
+   ``fuhub deploy myfunction.zip``
 6. Check the function has been uploaded on the selected repository
    (temporary unavailable)
 
