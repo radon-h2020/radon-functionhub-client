@@ -3,10 +3,8 @@ import configparser
 import requests
 import os
 import base64
-import zipfile
 import errno
 import shutil
-import logging
 
 from configparser import Error
 
@@ -85,7 +83,8 @@ def create_function(global_config, package_name, desired_dir):
     try:
         target_dir=os.path.join(desired_dir,package_name)
         os.mkdir(target_dir)
-        config_file = open('.resources/config.ini', 'r')
+        config_file_path = os.path.join(os.path.dirname(__file__), 'config.ini')
+        config_file = open(config_file_path, 'r')
         project_config = open(f"{target_dir}/config.ini", 'w')
         for line in config_file.readlines():
             project_config.write(line)
@@ -107,4 +106,4 @@ def package_function(package_dir):
     if os.path.isdir(package_dir):
         shutil.make_archive(os.path.join(os.getcwd(),os.path.basename(package_dir)), 'zip', os.path.dirname(package_dir))
     else:
-        raise click.ClickException(f"folder {filename} cannot be found")
+        raise click.ClickException(f"folder {package_dir} cannot be found")

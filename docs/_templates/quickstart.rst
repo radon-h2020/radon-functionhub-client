@@ -44,6 +44,7 @@ Pushing functions to FunctionHub using CLI
    [FUNCTION]
    name =
    version =
+   description = 
 
    [RUNTIME]
    provider =
