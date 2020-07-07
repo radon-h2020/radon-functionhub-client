@@ -55,6 +55,7 @@ def deploy_function(global_config, zip_file):
         payload['organization'] = config.get('REPOSITORY','org')
         payload['provider'] = config.get('RUNTIME','provider')
         payload['runtime'] = config.get('RUNTIME','runtime')
+        payload['description'] = config.get('FUNCTION','description')
         payload['token'] = global_config.token
         with open(zip_file,'rb') as binfile:
             encoded = base64.b64encode(binfile.read())
