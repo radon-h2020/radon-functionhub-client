@@ -51,11 +51,11 @@ def deploy_function(global_config, zip_file):
     try:
         payload['artifact_name'] = config.get('FUNCTION','name')
         payload['version'] = config.get('FUNCTION','version')
+        payload['description'] = config.get('FUNCTION','description')
         payload['repositoryName'] = config.get('REPOSITORY','repository')
         payload['organization'] = config.get('REPOSITORY','org')
         payload['provider'] = config.get('RUNTIME','provider')
         payload['runtime'] = config.get('RUNTIME','runtime')
-        payload['description'] = config.get('FUNCTION','description')
         payload['token'] = global_config.token
         with open(zip_file,'rb') as binfile:
             encoded = base64.b64encode(binfile.read())
