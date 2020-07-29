@@ -3,10 +3,8 @@ import configparser
 import requests
 import os
 import base64
-import zipfile
 import errno
 import shutil
-import logging
 
 from configparser import Error
 
@@ -39,11 +37,11 @@ def fuhub(ctx, endpoint, debug, token):
     # add a Global object to the context that will be passed to all subcommands
     ctx.obj = Global(endpoint, debug, token)
 
-# subcommnad for deploy operation
-@fuhub.command(name='deploy')
+# subcommnad for upload operation
+@fuhub.command(name='upload')
 @click.argument('zip_file', type=click.Path(exists=True,resolve_path=True))
 @click.pass_obj
-def deploy_function(global_config, zip_file):
+def upload_function(global_config, zip_file):
     pass
     if not os.path.exists('config.ini'):
         raise click.ClickException(f"Config file could not be found")
@@ -53,6 +51,7 @@ def deploy_function(global_config, zip_file):
     try:
         payload['artifact_name'] = config.get('FUNCTION','name')
         payload['version'] = config.get('FUNCTION','version')
+        payload['description'] = config.get('FUNCTION','description')
         payload['repositoryName'] = config.get('REPOSITORY','repository')
         payload['organization'] = config.get('REPOSITORY','org')
         payload['provider'] = config.get('RUNTIME','provider')
@@ -64,7 +63,7 @@ def deploy_function(global_config, zip_file):
     except:
         raise KeyError("unsupported key")
 
-    click.secho(f"deploy function {payload['artifact_name']} to repository {payload['repositoryName']}", bold=True)
+    click.secho(f"upload function {payload['artifact_name']} to repository {payload['repositoryName']}", bold=True)
     
     try:
         r = requests.post(
@@ -85,7 +84,8 @@ def create_function(global_config, package_name, desired_dir):
     try:
         target_dir=os.path.join(desired_dir,package_name)
         os.mkdir(target_dir)
-        config_file = open('.resources/config.ini', 'r')
+        config_file_path = os.path.join(os.path.dirname(__file__), 'config.ini')
+        config_file = open(config_file_path, 'r')
         project_config = open(f"{target_dir}/config.ini", 'w')
         for line in config_file.readlines():
             project_config.write(line)
@@ -107,4 +107,4 @@ def package_function(package_dir):
     if os.path.isdir(package_dir):
         shutil.make_archive(os.path.join(os.getcwd(),os.path.basename(package_dir)), 'zip', os.path.dirname(package_dir))
     else:
-        raise click.ClickException(f"folder {filename} cannot be found")
+        raise click.ClickException(f"folder {package_dir} cannot be found")
