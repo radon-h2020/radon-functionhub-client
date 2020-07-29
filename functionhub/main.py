@@ -37,11 +37,11 @@ def fuhub(ctx, endpoint, debug, token):
     # add a Global object to the context that will be passed to all subcommands
     ctx.obj = Global(endpoint, debug, token)
 
-# subcommnad for deploy operation
-@fuhub.command(name='deploy')
+# subcommnad for upload operation
+@fuhub.command(name='upload')
 @click.argument('zip_file', type=click.Path(exists=True,resolve_path=True))
 @click.pass_obj
-def deploy_function(global_config, zip_file):
+def upload_function(global_config, zip_file):
     pass
     if not os.path.exists('config.ini'):
         raise click.ClickException(f"Config file could not be found")
@@ -63,7 +63,7 @@ def deploy_function(global_config, zip_file):
     except:
         raise KeyError("unsupported key")
 
-    click.secho(f"deploy function {payload['artifact_name']} to repository {payload['repositoryName']}", bold=True)
+    click.secho(f"upload function {payload['artifact_name']} to repository {payload['repositoryName']}", bold=True)
     
     try:
         r = requests.post(
