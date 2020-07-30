@@ -28,7 +28,7 @@ def read_config(config_file):
 @click.group()
 @click.option('--endpoint', '-e', envvar='FH_ENDPOINT', default='https://cloudstash.io/artifact', help='Endpoint URL for your FunctionHub')
 @click.option('--debug', '-d', envvar='FH_DEBUG', default=False, help='Enable debug output')
-@click.option('--token', '-at', envvar='ACCESS_TOKEN', default=False, help='Set access token for publishing to private repositories')
+@click.option('--token', '-at', envvar='ACCESS_TOKEN', default="", help='Set access token for publishing to private repositories')
 # enabling the built in --version option. Uses the version from setup.py
 @click.version_option()
 # pass the main command context to other subcommands
@@ -56,7 +56,7 @@ def upload_function(global_config, zip_file):
         payload['organization'] = config.get('REPOSITORY','org')
         payload['provider'] = config.get('RUNTIME','provider')
         payload['runtime'] = config.get('RUNTIME','runtime')
-        payload['token'] = global_config.token
+        payload['applicationToken'] = global_config.token
         with open(zip_file,'rb') as binfile:
             encoded = base64.b64encode(binfile.read())
         payload['file'] = encoded.decode()
