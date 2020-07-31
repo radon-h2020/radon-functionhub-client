@@ -22,8 +22,6 @@ For FunctionHub developers and users, the following additional software must be 
 1. ``pip install functionhub``
 
 
-_make changes and verify with the client_
-
 ### User account & Navigation
 1.  Create a user account on [FunctionHub](https://cloudstash.io)  
 2.  Navigate through the website to discover different options for functions
@@ -31,12 +29,10 @@ _make changes and verify with the client_
 ### Pushing functions to FunctionHub using CLI
 
 1. Create a project. ``fuhub create exampleProject`` 
-2. Move to the project directory. ``cd exampleProject`` 
+2. Change directory to the project directory. ``cd exampleProject``
 3. Set the configuration file _config.ini_ with your parameters. (example of _config.ini_ can be found  in [test](test/) directory)
-4. Store a function and compress it as myfunction.zip
-5. Deploy the function to [FunctionHub](https://cloudstash.io). ``fuhub upload myfunction.zip`` 
-6. Check the function has been uploaded on the selected repository (temporary unavailable)
-
+4. Create a zipped folder containing your function and libraries if necessary.
+5. Upload the function to [FunctionHub](https://cloudstash.io). ``fuhub upload myfunction.zip`` 
 
 
 ## Contribution
@@ -45,7 +41,6 @@ We encourage contributions from everyone who finds interest in this project!
 For any ideas, bugs or new features use our issue tracker at our  [GitHub](https://github.com/radon-h2020/functionHub-client/issues)  project.
 
 When contributing, fork the repository and commit work through pull requests.
-
 
 
 

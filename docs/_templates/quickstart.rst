@@ -9,13 +9,13 @@ This README is currently tailored to Unix-like systems (MacOS, Linux).
 For FunctionHub developers and users, the following additional software
 must be installed:
 
--  pip - Python standard package manager
+-  pip3 - Python3 standard package manager
 
 
 Download the Function Hub client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. pip install functionhub
+1. pip3 install functionhub
 
 **make changes and verify with the local cli**
 
@@ -51,11 +51,9 @@ Pushing functions to FunctionHub using CLI
    runtime =
 
    
-4. Store a function and compress it as myfunction.zip
-5. Deploy the function to `FunctionHub <https://cloudstash.io>`__.
-   ``fuhub deploy myfunction.zip``
-6. Check the function has been uploaded on the selected repository
-   (temporary unavailable)
+4. Create a zipped folder containing your function and libraries if necessary.
+5. Upload the function to `FunctionHub <https://cloudstash.io>`__.
+   ``fuhub upload myfunction.zip``
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
