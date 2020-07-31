@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='functionhub',
-    version='0.1.6',
+    version='0.1.7',
     author="naesheim",
     description="A client for CloudStash.io interaction",
     url="https://cloudstash.io",
