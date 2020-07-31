@@ -34,7 +34,7 @@ _make changes and verify with the client_
 2. Move to the project directory. ``cd exampleProject`` 
 3. Set the configuration file _config.ini_ with your parameters. (example of _config.ini_ can be found  in [test](test/) directory)
 4. Store a function and compress it as myfunction.zip
-5. Deploy the function to [FunctionHub](https://cloudstash.io). ``fuhub deploy myfunction.zip`` 
+5. Deploy the function to [FunctionHub](https://cloudstash.io). ``fuhub upload myfunction.zip`` 
 6. Check the function has been uploaded on the selected repository (temporary unavailable)
 
 
