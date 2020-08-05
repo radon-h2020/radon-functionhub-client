@@ -34,6 +34,12 @@ For FunctionHub developers and users, the following additional software must be 
 4. Create a zipped folder containing your function and libraries if necessary.
 5. Upload the function to [FunctionHub](https://cloudstash.io). ``fuhub upload myfunction.zip`` 
 
+### Retreiving Functions from FunctionHub 
+
+1. Browse [FunctionHub](https://cloudstash.io) and find the Function of your choice
+2. Copy the ArtifacId
+3. In terminal do ``curl -O function.zip https://cloudstash.io/artifact_download/<ArtifactId> ``
+
 
 ## Contribution
 We encourage contributions from everyone who finds interest in this project!
