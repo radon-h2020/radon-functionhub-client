@@ -5,9 +5,11 @@ with open("README.md", "r") as fh:
 
 setup(
     name='functionhub',
-    version='0.1.7',
+    version='0.1.8',
     author="naesheim",
     description="A client for CloudStash.io interaction",
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     url="https://cloudstash.io",
     packages=find_packages(),
     package_data = {'functionhub': ['config.ini']},
