@@ -3,7 +3,11 @@ venv/
 .vscode
 .DS_store
 
+
 docs/_build
 docs/_static
+build
+dist
+*.egg-info
 
-*/__pycache__
+__pycache__

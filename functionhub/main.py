@@ -56,6 +56,7 @@ def upload_function(global_config, zip_file):
         payload['organization'] = config.get('REPOSITORY','org')
         payload['provider'] = config.get('RUNTIME','provider')
         payload['runtime'] = config.get('RUNTIME','runtime')
+        payload['handler'] = config.get('RUNTIME','handler')
         payload['applicationToken'] = global_config.token
         with open(zip_file,'rb') as binfile:
             encoded = base64.b64encode(binfile.read())

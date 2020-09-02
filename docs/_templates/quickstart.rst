@@ -49,6 +49,7 @@ Pushing functions to FunctionHub using CLI
    [RUNTIME]
    provider =
    runtime =
+   handler =
 
    
 4. Create a zipped folder containing your function and libraries if necessary.
