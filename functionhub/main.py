@@ -67,7 +67,7 @@ def upload_function(global_config, zip_file):
         r = requests.post(
             global_config.endpoint,
             json=payload,
-            headers={'content-type':'application/json'}
+            headers={'content-type':'application/json', 'Authorization': global_config.token} if global_config.token else {'content-type':'application/json'}
         )
         click.echo(r.status_code)
 
