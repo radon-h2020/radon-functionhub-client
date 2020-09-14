@@ -23,8 +23,9 @@ User account & Navigation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Create a user account on `FunctionHub <https://cloudstash.io>`__
-2. Create a new repository
-3. Navigate through the website to discover different options for
+2. Store the deploy-token given to you
+3. Create a new repository
+4. Navigate through the website to discover different options for
    functions
 
 Pushing functions to FunctionHub using CLI
@@ -54,7 +55,7 @@ Pushing functions to FunctionHub using CLI
    
 4. Create a zipped folder containing your function and libraries if necessary.
 5. Upload the function to `FunctionHub <https://cloudstash.io>`__.
-   ``fuhub upload myfunction.zip``
+   ``fuhub --token <deploy-token> upload myfunction.zip``
 
 
 
