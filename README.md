@@ -23,8 +23,9 @@ For FunctionHub developers and users, the following additional software must be 
 
 
 ### User account & Navigation
-1.  Create a user account on [FunctionHub](https://cloudstash.io)  
-2.  Navigate through the website to discover different options for functions
+1.  Create a user account on [FunctionHub](https://cloudstash.io)
+2.  Store the deploy token given to you
+3.  Navigate through the website to discover different options for functions
 
 ### Pushing functions to FunctionHub using CLI
 
@@ -32,7 +33,7 @@ For FunctionHub developers and users, the following additional software must be 
 2. Change directory to the project directory. ``cd exampleProject``
 3. Set the configuration file _config.ini_ with your parameters. (example of _config.ini_ can be found  in [test](test/) directory)
 4. Create a zipped folder containing your function and libraries if necessary.
-5. Upload the function to [FunctionHub](https://cloudstash.io). ``fuhub upload myfunction.zip`` 
+5. Upload the function to [FunctionHub](https://cloudstash.io). ``fuhub --token <deploy-token> upload myfunction.zip`` 
 
 ### Retreiving Functions from FunctionHub 
 
