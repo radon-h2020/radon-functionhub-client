@@ -64,4 +64,4 @@ Retreiving Functions from FunctionHub
 
 1. Browse `FunctionHub <https://cloudstash.io>`__ and find the Function of your choice.
 2. Copy the ArtifacId.
-3. In terminal do ``curl -O function.zip https://cloudstash.io/artifact_download/*ArtifactId*``
+3. In terminal do ``curl -o function.zip https://cloudstash.io/artifact_download/*ArtifactId*``
