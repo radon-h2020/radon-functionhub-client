@@ -13,4 +13,9 @@ requests.
 
 Read the `roadmap <https://github.com/radon-h2020/functionHub-client/blob/master/ROADMAP.md>`__
 
+For local development do:
+
+`` python3 -m venv venv ``
+`` pip install --editable ``
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

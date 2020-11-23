@@ -18,9 +18,12 @@ pipeline {
         stage('Upload Python package') {
             environment {
                 PYPI_ACCESS_TOKEN = credentials('naesheim-private-pypi')
+                RELEASE = sh(script: 'test -n "${GIT_COMMIT | awk \'/deploy/ {print $1}\'}" && echo true || echo false',returnStdout: true)
             }
+            when { expression { RELEASE = true } } 
             steps {
                 sh '''
+                    echo $RELEASE
                     rm -rf dist
                     . venv/bin/activate
                     pip3 install twine wheel
