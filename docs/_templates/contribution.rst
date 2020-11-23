@@ -18,4 +18,6 @@ For local development do:
 `` python3 -m venv venv ``
 `` pip install --editable ``
 
+When deploying a new version through the Jenkins CI make sure to add [deploy] keyword in the commit message
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
