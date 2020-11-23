@@ -18,12 +18,12 @@ pipeline {
         stage('Upload Python package') {
             environment {
                 PYPI_ACCESS_TOKEN = credentials('naesheim-private-pypi')
-                RELEASE = sh(script: 'test -n "${GIT_COMMIT | awk \'/deploy/ {print $1}\'}" && echo true || echo false',returnStdout: true)
+                RELEASE = sh(script: 'test -n "$(git log -1 --pretty=oneline| awk \'/deploy/ {print $1}\')" && echo true || echo false',returnStdout: true)
             }
-            when { expression { RELEASE = true } } 
+            when { expression { environment name: 'RELEASE', value: true } } 
             steps {
                 sh '''
-                    echo $RELEASE
+                    echo "only build when commit message include [deploy]
                     rm -rf dist
                     . venv/bin/activate
                     pip3 install twine wheel
