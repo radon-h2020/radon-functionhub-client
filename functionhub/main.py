@@ -10,10 +10,11 @@ from configparser import Error, NoOptionError
 
 # global class with all global data
 class Global(object):
-    def __init__(self, endpoint, debug, token):
+    def __init__(self, endpoint, debug, token,configfile):
         self.endpoint = endpoint
         self.debug = debug
         self.token = token
+        self.configfile = configfile
 
 def read_config(config_file):
     try:
@@ -29,13 +30,14 @@ def read_config(config_file):
 @click.option('--endpoint', '-e', envvar='FH_ENDPOINT', default='https://cloudstash.io/artifact', help='Endpoint URL for your FunctionHub')
 @click.option('--debug', '-d', envvar='FH_DEBUG', default=False, help='Enable debug output')
 @click.option('--token', '-at', envvar='ACCESS_TOKEN', default="", help='Set access token for publishing to private repositories')
+@click.option('--configfile','-f',envvar='FH_CONFIG', default="config.ini", help='FunctionHub config file')
 # enabling the built in --version option. Uses the version from setup.py
 @click.version_option()
 # pass the main command context to other subcommands
 @click.pass_context
-def fuhub(ctx, endpoint, debug, token):
+def fuhub(ctx, endpoint, debug, token,configfile):
     # add a Global object to the context that will be passed to all subcommands
-    ctx.obj = Global(endpoint, debug, token)
+    ctx.obj = Global(endpoint, debug, token, configfile)
 
 # subcommnad for upload operation
 @fuhub.command(name='upload')
@@ -43,10 +45,10 @@ def fuhub(ctx, endpoint, debug, token):
 @click.pass_obj
 def upload_function(global_config, zip_file):
     pass
-    if not os.path.exists('config.ini'):
+    if not os.path.exists(global_config.configfile):
         raise click.ClickException(f"Config file could not be found")
         
-    config = read_config('config.ini')
+    config = read_config(global_config.configfile)
     payload = {}
     try:
         payload['artifact_name'] = config.get('FUNCTION','name')
@@ -69,6 +71,7 @@ def upload_function(global_config, zip_file):
             json=payload,
             headers={'content-type':'application/json', 'Authorization': global_config.token} if global_config.token else {'content-type':'application/json'}
         )
+        click.echo(r)
         click.echo(r.status_code)
 
     except KeyError as ke:
@@ -86,9 +89,9 @@ def create_function(global_config, package_name, desired_dir):
     try:
         target_dir=os.path.join(desired_dir,package_name)
         os.mkdir(target_dir)
-        config_file_path = os.path.join(os.path.dirname(__file__), 'config.ini')
+        config_file_path = os.path.join(os.path.dirname(__file__), global_config.configfile)
         config_file = open(config_file_path, 'r')
-        project_config = open(f"{target_dir}/config.ini", 'w')
+        project_config = open(f"{target_dir}/{global_config.configfile}", 'w')
         for line in config_file.readlines():
             project_config.write(line)
         
