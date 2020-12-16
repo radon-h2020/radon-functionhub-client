@@ -1,3 +1,6 @@
+![pypi](https://img.shields.io/pypi/v/pybadges.svg)
+![versions](https://img.shields.io/pypi/pyversions/pybadges.svg)
+
 # FunctionHub client 
 
 | Items                    | Contents                                                     |
