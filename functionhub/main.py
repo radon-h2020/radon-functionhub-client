@@ -44,7 +44,6 @@ def fuhub(ctx, endpoint, debug, token,configfile):
 @click.argument('zip_file', type=click.Path(exists=True,resolve_path=True))
 @click.pass_obj
 def upload_function(global_config, zip_file):
-    pass
     if not os.path.exists(global_config.configfile):
         raise click.ClickException(f"Config file could not be found")
         
@@ -71,7 +70,6 @@ def upload_function(global_config, zip_file):
             json=payload,
             headers={'content-type':'application/json', 'Authorization': global_config.token} if global_config.token else {'content-type':'application/json'}
         )
-        # click.echo(r)
         click.echo(r.status_code)
 
     except KeyError as ke:

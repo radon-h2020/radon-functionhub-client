@@ -1,6 +1,6 @@
 [![PyPi Version](https://img.shields.io/pypi/v/functionhub.svg)](https://pypi.python.org/pypi/functionhub/)
 [![Downloads](https://pepy.tech/badge/functionhub)](https://pepy.tech/project/functionhub)
-[![coverage](functionhub/.coverage-badge.svg?style=flat)](http://shields.io/)
+[![coverage](test/.coverage-badge.svg?style=flat)](http://shields.io/)
 
 # FunctionHub client 
 
@@ -53,6 +53,13 @@ For any ideas, bugs or new features use our issue tracker at our  [GitHub](https
 
 When contributing, fork the repository and commit work through pull requests.
 
-
-
 Read the [roadmap](ROADMAP.md)
+
+
+## Test Suite
+The test suite is located in the [test](test). The following instructions executes the test suite powered by pytest and coverage.
+1. ``coverage run --source ../functionhub -m pytest ``
+2. ``coverage report -m``
+
+
+
