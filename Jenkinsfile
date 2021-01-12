@@ -15,6 +15,8 @@ pipeline {
                     pip3 install --editable .
 
                     fuhub --help
+                    cd function_hub
+                    pytest
                 '''
             }
         }
