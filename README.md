@@ -1,5 +1,6 @@
-![pypi](https://img.shields.io/pypi/v/pybadges.svg)
-![versions](https://img.shields.io/pypi/pyversions/pybadges.svg)
+[![PyPi Version](https://img.shields.io/pypi/v/functionhub.svg)](https://pypi.python.org/pypi/functionhub/)
+[![Downloads](https://pepy.tech/badge/functionhub)](https://pepy.tech/project/functionhub)
+[![coverage](functionhub/.coverage-badge.svg?style=flat)](http://shields.io/)
 
 # FunctionHub client 
 

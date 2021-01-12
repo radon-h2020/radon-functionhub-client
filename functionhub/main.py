@@ -71,7 +71,7 @@ def upload_function(global_config, zip_file):
             json=payload,
             headers={'content-type':'application/json', 'Authorization': global_config.token} if global_config.token else {'content-type':'application/json'}
         )
-        click.echo(r)
+        # click.echo(r)
         click.echo(r.status_code)
 
     except KeyError as ke:
