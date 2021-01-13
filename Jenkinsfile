@@ -15,6 +15,9 @@ pipeline {
                     pip3 install --editable .
 
                     fuhub --help
+                    cd test
+                    coverage run --source ../functionhub -m pytest
+                    coverage report -m
                 '''
             }
         }
