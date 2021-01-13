@@ -8,6 +8,7 @@ pipeline {
         stage('Set ut testing environment') {
             steps {
                 sh '''
+                    git clean -fd
                     echo Install requirements
                     python3 -m venv venv
                     . venv/bin/activate
