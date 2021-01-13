@@ -5,15 +5,15 @@ test_folder = 'example'
 
 def test_create_folder():
     runner = CliRunner()
-    result = runner.invoke(fuhub, ['create','example'])
-
-    assert result.exception
-
-def test_create_existing_folder():
-    runner = CliRunner()
     result = runner.invoke(fuhub, ['create','test'])
 
     assert result.output == f"project test successfully created\n"
+
+def test_create_existing_folder():
+    runner = CliRunner()
+    result = runner.invoke(fuhub, ['create',test_folder])
+
+    assert result.exception
 
 def test_create_package():
     runner = CliRunner()
