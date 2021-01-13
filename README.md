@@ -1,6 +1,8 @@
+[![Build Status](http://217.172.12.165:8080/buildStatus/icon?job=PRQ%2FFunctionHub-client%2Fradon-functionhub-client)](http://217.172.12.165:8080/job/PRQ/job/FunctionHub-client/job/radon-functionhub-client/)
+[![coverage](test/.coverage-badge.svg?style=flat)](http://shields.io/)
 [![PyPi Version](https://img.shields.io/pypi/v/functionhub.svg)](https://pypi.python.org/pypi/functionhub/)
 [![Downloads](https://pepy.tech/badge/functionhub)](https://pepy.tech/project/functionhub)
-[![coverage](test/.coverage-badge.svg?style=flat)](http://shields.io/)
+
 
 # FunctionHub client 
 
@@ -57,7 +59,7 @@ Read the [roadmap](ROADMAP.md)
 
 
 ## Test Suite
-The test suite is located in the [test](test). The following instructions executes the test suite powered by pytest and coverage.
+The test suite is located in the [test](test) folder. The following instructions executes the test suite powered by pytest and coverage.
 1. ``coverage run --source ../functionhub -m pytest ``
 2. ``coverage report -m``
 
