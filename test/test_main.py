@@ -1,4 +1,4 @@
-from functionhub.main import fuhub, Global
+from functionhub.main import fuhub
 from click.testing import CliRunner
 
 test_folder = 'example'
@@ -31,7 +31,7 @@ def test_upload_package():
     runner = CliRunner()
     result = runner.invoke(fuhub, ['-f', 'example/config.ini', 'upload',f"{test_folder}.zip"])
 
-    assert result.output == f"upload function hello-world to repository my-public-functions\n502\n"
+    assert result.output == f"upload function hello-world to repository my-public-functions\nSize limitation, consider a paid subscription\n"
 
 def test_upload_package_with_missing_config_file():
     runner = CliRunner()
