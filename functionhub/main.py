@@ -70,14 +70,19 @@ def upload_function(global_config, zip_file):
             json=payload,
             headers={'content-type':'application/json', 'Authorization': global_config.token} if global_config.token else {'content-type':'application/json'}
         )
-        click.echo(r.status_code)
+        if r.status_code == 200:
+            click.secho(f"{payload['artifact_name']} was successfully uploaded",fg='green')
+        elif r.status_code == 403:
+            click.secho("authentication error",fg='red')
+        else:
+            click.secho("Size limitation, consider a paid subscription",fg='red')
 
     except KeyError as ke:
         click.secho(f"{ke}",fg='red') 
     except NoOptionError as noe:
         click.secho(f"{noe}",fg='red')
     except requests.exceptions.RequestException as re:
-            click.secho(f"{re}",fg='red')
+            click.secho(f"{re.message}",fg='red')
 
 @fuhub.command(name='create')
 @click.argument('package_name', type=click.Path(exists=False))
@@ -108,6 +113,6 @@ def create_function(global_config, package_name, desired_dir):
 @click.argument('package_dir', type=click.Path(exists=True, resolve_path=True,))
 def package_function(package_dir):
     if os.path.isdir(package_dir):
-        shutil.make_archive(os.path.join(os.getcwd(),os.path.basename(package_dir)), 'zip', os.path.dirname(package_dir))
+        shutil.make_archive(package_dir, 'zip', package_dir)
     else:
         raise click.ClickException(f"folder {package_dir} cannot be found")
