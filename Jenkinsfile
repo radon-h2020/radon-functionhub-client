@@ -31,7 +31,8 @@ pipeline {
                 sh '''
                     rm -rf dist
                     . venv/bin/activate
-                    pip3 install --upgrade pip twine wheel
+                    pip install --upgrade pip
+                    pip install twine wheel
                     python3 setup.py sdist bdist_wheel
                     python3 -m twine upload -u __token__ -p $PYPI_ACCESS_TOKEN dist/*
                 '''
