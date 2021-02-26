@@ -77,12 +77,8 @@ def upload_function(global_config, zip_file):
         else:
             click.secho("Size limitation, consider a paid subscription",fg='red')
 
-    except KeyError as ke:
+    except Error as ke:
         click.secho(f"{ke}",fg='red') 
-    except NoOptionError as noe:
-        click.secho(f"{noe}",fg='red')
-    except requests.exceptions.RequestException as re:
-            click.secho(f"{re.message}",fg='red')
 
 @fuhub.command(name='create')
 @click.argument('package_name', type=click.Path(exists=False))
@@ -107,12 +103,8 @@ def create_function(global_config, package_name, desired_dir):
             raise click.ClickException("Project already exist")
         else:
             os.rmdir(target_dir)
-            raise click.ClickException(err)         
 
 @fuhub.command(name='package')
-@click.argument('package_dir', type=click.Path(exists=True, resolve_path=True,))
+@click.argument('package_dir', type=click.Path(exists=True, resolve_path=True))
 def package_function(package_dir):
-    if os.path.isdir(package_dir):
-        shutil.make_archive(package_dir, 'zip', package_dir)
-    else:
-        raise click.ClickException(f"folder {package_dir} cannot be found")
+    shutil.make_archive(package_dir, 'zip', package_dir)
