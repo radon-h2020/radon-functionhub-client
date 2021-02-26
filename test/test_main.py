@@ -55,3 +55,5 @@ def test_upload_package_with_missing_config_file():
     runner.invoke(fuhub, ['package',test_folder])
     result = runner.invoke(fuhub, ['upload',f"{test_folder}.zip"])
     assert result.output == "Error: Config file could not be found\n"
+    #CLEANUP
+    os.remove(f"{test_folder}.zip")
