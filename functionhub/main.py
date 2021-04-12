@@ -77,16 +77,16 @@ def upload_function(global_config, zip_file):
         else:
             click.secho("Size limitation, consider a paid subscription",fg='red')
 
-    except Error as ke:
-        click.secho(f"{ke}",fg='red') 
+    except configparser.NoOptionError as noe:
+        click.secho(f"{noe}",fg='red')
 
 @fuhub.command(name='create')
 @click.argument('package_name', type=click.Path(exists=False))
 @click.argument('desired_dir', required=False, default=os.getcwd(), type=click.Path(exists=True,resolve_path=True, writable=True))
 @click.pass_obj
 def create_function(global_config, package_name, desired_dir):
+    target_dir=os.path.join(desired_dir,package_name)
     try:
-        target_dir=os.path.join(desired_dir,package_name)
         os.mkdir(target_dir)
         config_file_path = os.path.join(os.path.dirname(__file__), global_config.configfile)
         config_file = open(config_file_path, 'r')
